@@ -61,29 +61,29 @@ window.rowconfigure(3, weight=1)
 
 
 def get_weather():
-    # try:
-    api_key = 'INPUT KEY HEERE'
-    zipcode = zipcode_entry.get()
+    try:
+        api_key = 'INPUT KEY HEERE'
+        zipcode = zipcode_entry.get()
 
-    # Get the city name from the zipcode using the Zippopotam API
-    city_url = f"https://api.zippopotam.us/us/{zipcode}"
-    city_response = requests.get(city_url)
-    city_data = json.loads(city_response.text)
-    city_name = city_data["places"][0]["place name"]
-    city_label.config(text=f'Weather in {city_name}')
+        # Get the city name from the zipcode using the Zippopotam API
+        city_url = f"https://api.zippopotam.us/us/{zipcode}"
+        city_response = requests.get(city_url)
+        city_data = json.loads(city_response.text)
+        city_name = city_data["places"][0]["place name"]
+        city_label.config(text=f'Weather in {city_name}')
 
-    url = f'https://api.openweathermap.org/data/2.5/weather?zip={zipcode},&APPID={api_key}'
+        url = f'https://api.openweathermap.org/data/2.5/weather?zip={zipcode},&APPID={api_key}'
 
-    response = requests.get(url)
+        response = requests.get(url)
 
-    weather_data = json.loads(response.content)
-    # print(weather_data)
+        weather_data = json.loads(response.content)
+        # print(weather_data)
     
-    #Convert to Farenheit
-    temperature = round((weather_data['main']['temp'] - 273.15) * (9 / 5) + 32, 2)
-    humidity = weather_data['main']['humidity']
-    wind_speed = weather_data['wind']['speed']
-    description = weather_data['weather'][0]['description']
+        # Convert to Farenheit
+        temperature = round((weather_data['main']['temp'] - 273.15) * (9 / 5) + 32, 2)
+        humidity = weather_data['main']['humidity']
+        wind_speed = weather_data['wind']['speed']
+        description = weather_data['weather'][0]['description']
 
     # if temperature < 60:
     #    bg_image = Image.open("snow1.png")
@@ -98,14 +98,14 @@ def get_weather():
     # print(f'Wind Speed: {wind_speed} m/s')
     # print(f'Weather Description: {description}')
 
-    temp_value_label.config(text=f'{temperature} °F')
-    humidity_value_label.config(text=f'{humidity}%')
-    wind_speed_value_label.config(text=f'{wind_speed} m/s')
-    description_value_label.config(text=f'{description.capitalize()}')
+        temp_value_label.config(text=f'{temperature} °F')
+        humidity_value_label.config(text=f'{humidity}%')
+        wind_speed_value_label.config(text=f'{wind_speed} m/s')
+        description_value_label.config(text=f'{description.capitalize()}')
 
 
-# except:
-# messagebox.showerror("Error", "Please enter a valid US Zipcode")
+    except:
+        messagebox.showerror("Error", "Please enter a valid US Zipcode")
 
 
 # Button to get weather data
