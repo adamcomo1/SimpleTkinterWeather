@@ -62,7 +62,7 @@ window.rowconfigure(3, weight=1)
 
 def get_weather():
     # try:
-    api_key = '1ae486b1c81c89b2fcd44c09c7976eb5'
+    api_key = 'INPUT KEY HEERE'
     zipcode = zipcode_entry.get()
 
     # Get the city name from the zipcode using the Zippopotam API
@@ -78,7 +78,8 @@ def get_weather():
 
     weather_data = json.loads(response.content)
     # print(weather_data)
-
+    
+    #Convert to Farenheit
     temperature = round((weather_data['main']['temp'] - 273.15) * (9 / 5) + 32, 2)
     humidity = weather_data['main']['humidity']
     wind_speed = weather_data['wind']['speed']
